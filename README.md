@@ -19,5 +19,5 @@ Bienvenido a mi portafolio personal. Este proyecto ha sido creado para mostrar m
 
 ## Créditos
 
-Este proyecto se realizó en base al tutorial de [Adrian Hajdin](https://github.com/adrianhajdin/threejs-portfolio).
+Adrian Hajdin - [ JavaScript Mastery: "Build & Deploy an Amazing 3D Portfolio with React.js & Three.js" ](https://github.com/adrianhajdin/threejs-portfolio).
 
