@@ -286,3 +286,24 @@ export const workExperiences = [
     animation: 'salute',
   },
 ];
+
+export const socialLinks = [
+  {
+    id: 1,
+    name: 'GitHub',
+    icon: '/assets/github.svg',
+    href: 'https://github.com/BonanseaMariano',
+  },
+  {
+    id: 2,
+    name: 'LinkedIn',
+    icon: '/assets/linkedin.svg',
+    href: 'https://www.linkedin.com/in/marianobonansea/',
+  },
+  {
+    id: 3,
+    name: 'Instagram',
+    icon: '/assets/instagram.svg',
+    href: 'https://www.instagram.com/marianobonansea/',
+  },
+];
