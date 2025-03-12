@@ -64,23 +64,23 @@ const Projects = () => {
               href={currentProject.href}
               target="_blank"
               rel="noreferrer">
-              <p>Ver sitio en vivo</p>
-              <img src="/assets/arrow-up.png" alt="arrow" className="w-3 h-3" />
+              <p>Ver Sitio Web</p>
+              <img src="/assets/arrow-up.png" alt="flecha" className="w-3 h-3" />
             </a>
           </div>
 
           <div className="flex justify-between items-center mt-7">
             <button className="arrow-btn" onClick={() => handleNavigation('previous')}>
-              <img src="/assets/left-arrow.png" alt="left arrow" />
+              <img src="/assets/left-arrow.png" alt="flecha izquierda" />
             </button>
 
             <button className="arrow-btn" onClick={() => handleNavigation('next')}>
-              <img src="/assets/right-arrow.png" alt="right arrow" className="w-4 h-4" />
+              <img src="/assets/right-arrow.png" alt="flecha derecha" className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        <div className="border border-black-300 bg-black-200 rounded-lg h-96">
+        <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
           <Canvas>
             <ambientLight intensity={Math.PI} />
             <directionalLight position={[10, 10, 5]} />
