@@ -8,9 +8,9 @@ import { SecurityBot } from '../components/SecurityBot.jsx';
 
 const RobotSection = () => {
     return (
-        <section className="c-space my-20 min-h-screen flex flex-col" id="robot">
+        <section className="c-space my-20 flex flex-col" id="robot">
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 w-full flex-grow">
-                <div className="border border-black-300 bg-black-200 rounded-lg flex-grow flex">
+                <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
                     <Canvas className="w-full h-full">
                         <ambientLight intensity={0.5} />
                         <PerspectiveCamera makeDefault position={[0, 1.3, 5]} />
@@ -25,9 +25,9 @@ const RobotSection = () => {
                     </Canvas>
                 </div>
 
-                <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200 bg-black-200 rounded-lg flex-grow">
+                <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200 bg-black-200 rounded-lg">
                     <div className="absolute top-0 right-0">
-                        <img src="/assets/spotlight5.png" alt="spotlight" className="w-full h-full object-cover rounded-xl" />
+                        <img src="/assets/spotlight5.png" alt="spotlight" className="w-full h-96 object-cover rounded-xl" />
                     </div>
 
                     <h2 className="text-3xl font-bold text-gray_gradient">
