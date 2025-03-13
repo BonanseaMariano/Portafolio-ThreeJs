@@ -1,6 +1,12 @@
 import { useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { PerspectiveCamera, Center } from '@react-three/drei';
+import { Suspense } from 'react';
 import Button from '../components/Button.jsx';
 import DayNightGlobe from '../components/DayNightGlobe.jsx';
+import WorkingDesk from '../components/Working-desk.jsx';
+import CanvasLoader from '../components/Loading.jsx';
+
 
 const About = () => {
   const [hasCopied, setHasCopied] = useState(false);
@@ -33,7 +39,23 @@ const About = () => {
 
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
-            <img src="assets/grid2.png" alt="grid-2" className="w-full sm:h-[276px] h-fit object-contain" />
+            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center" style={{ overflow: 'hidden' }}>
+              <Canvas className="w-full h-full">
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[-3, 0, 0]} intensity={2} />
+                <PerspectiveCamera
+                  makeDefault
+                  position={[-1.5, 3, 10]}
+                  lookAt={[0, 0, 0]}
+                />
+                <Center>
+                  <Suspense fallback={<CanvasLoader />}>
+                    <WorkingDesk rotation={[0.5, -2.5, 0]} scale={0.8} />
+                  </Suspense>
+                </Center>
+
+              </Canvas>
+            </div>
 
             <div>
               <p className="grid-headtext">Tech Stack</p>
