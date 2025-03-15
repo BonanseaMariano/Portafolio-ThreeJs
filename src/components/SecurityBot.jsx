@@ -7,23 +7,32 @@ Source: https://sketchfab.com/3d-models/puc-security-bot-7-ee0a6da142b94d2bbf1d6
 Title: P.U.C. security bot #7
 */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 
-export function SecurityBot(props) {
+export function SecurityBot({ isVisible = false, ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('/models/p.u.c._security_bot_7.glb');
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    // Reproduce la primera animación disponible
+    // Controlar la animación basado en la visibilidad
     if (actions && Object.keys(actions).length > 0) {
-      actions[Object.keys(actions)[0]].play();
+      const animationName = Object.keys(actions)[0];
+      
+      if (isVisible) {
+        // Iniciar animación cuando es visible
+        actions[animationName].reset().play();
+      } else {
+        // Pausar animación cuando no es visible
+        actions[animationName].stop();
+      }
     }
-  }, [actions]);
+  }, [actions, isVisible]);
 
-  return (
-    <group ref={group} {...props} dispose={null}>
+  // Memorizar las partes estáticas del modelo para evitar recreaciones innecesarias
+  const robotMesh = useMemo(() => (
+    <group {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group name="Root">
@@ -61,7 +70,9 @@ export function SecurityBot(props) {
         </group>
       </group>
     </group>
-  );
+  ), [nodes, materials, props]);
+
+  return <group ref={group}>{robotMesh}</group>;
 }
 
 useGLTF.preload('/models/p.u.c._security_bot_7.glb');

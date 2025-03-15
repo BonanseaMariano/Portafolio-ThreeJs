@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera, Center } from '@react-three/drei';
 import { Suspense } from 'react';
+import { useInView } from 'react-intersection-observer';
 import Button from '../components/Button.jsx';
 import DayNightGlobe from '../components/DayNightGlobe.jsx';
 import WorkingDesk from '../components/Working-desk.jsx';
@@ -10,6 +11,14 @@ import CanvasLoader from '../components/Loading.jsx';
 
 const About = () => {
   const [hasCopied, setHasCopied] = useState(false);
+
+  // Configurar el hook de intersection observer con un umbral del 30%
+  // rootMargin añade margen para precargar antes de que sea visible
+  const [deskRef, deskInView] = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+    rootMargin: '200px 0px' // Precarga cuando está a 200px de entrar en viewport
+  });
 
   const handleCopy = () => {
     navigator.clipboard.writeText('marianobonanseapetrovial@gmail.com');
@@ -37,10 +46,14 @@ const About = () => {
           </div>
         </div>
 
-        <div className="col-span-1 xl:row-span-3">
+        <div className="col-span-1 xl:row-span-3" ref={deskRef}>
           <div className="grid-container">
             <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center" style={{ overflow: 'hidden' }}>
-              <Canvas className="w-full h-full">
+              {/* Mantener el Canvas siempre montado pero controlar el frameloop */}
+              <Canvas className="w-full h-full"
+                frameloop={deskInView ? 'always' : 'demand'}
+                dpr={[1, 2]}
+              >
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[-3, 0, 0]} intensity={2} />
                 <PerspectiveCamera
@@ -50,10 +63,9 @@ const About = () => {
                 />
                 <Center>
                   <Suspense fallback={<CanvasLoader />}>
-                    <WorkingDesk rotation={[0.5, -2.5, 0]} scale={0.8} />
+                    <WorkingDesk rotation={[0.5, -2.5, 0]} scale={0.8} isVisible={deskInView} />
                   </Suspense>
                 </Center>
-
               </Canvas>
             </div>
 
