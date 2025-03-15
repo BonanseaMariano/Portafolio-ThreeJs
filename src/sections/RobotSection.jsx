@@ -1,27 +1,41 @@
-import { Leva } from 'leva';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera, Center } from '@react-three/drei';
+import { useInView } from 'react-intersection-observer';
 
 import CanvasLoader from '../components/Loading.jsx';
 import { SecurityBot } from '../components/SecurityBot.jsx';
 
 const RobotSection = () => {
+    // Configurar el hook de intersection observer con un umbral del 30% y precarga
+    const [ref, inView] = useInView({
+        threshold: 0.1,
+        triggerOnce: false,
+        rootMargin: '200px 0px' // Precargar 200px antes de que sea visible
+    });
+
     return (
         <section className="c-space my-20 flex flex-col" id="robot">
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 w-full flex-grow">
-                <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
-                    <Canvas className="w-full h-full">
+                <div
+                    ref={ref}
+                    className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full"
+                >
+                    {/* Mantener el Canvas siempre montado pero pausar frameloop cuando no es visible */}
+                    <Canvas 
+                        className="w-full h-full"
+                        frameloop={inView ? 'always' : 'demand'} 
+                        dpr={[1, 2]}
+                    >
                         <ambientLight intensity={0.5} />
                         <PerspectiveCamera makeDefault position={[0, 1.3, 5]} />
                         <Center>
                             <Suspense fallback={<CanvasLoader />}>
                                 <group scale={1} position={[0, 0, 0]}>
-                                    <SecurityBot />
+                                    <SecurityBot isVisible={inView} />
                                 </group>
                             </Suspense>
                         </Center>
-                        <Leva hidden />
                     </Canvas>
                 </div>
 

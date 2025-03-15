@@ -22,6 +22,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-globe.gl": "^2.33.1",
+    "react-intersection-observer": "^9.16.0",
     "react-responsive": "^10.0.0",
     "solar-calculator": "^0.3.0",
     "three": "^0.174.0",
