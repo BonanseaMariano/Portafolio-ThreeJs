@@ -54,19 +54,30 @@ const Projects = () => {
             <div className="flex items-center gap-3">
               {currentProject.tags.map((tag, index) => (
                 <div key={index} className="tech-logo">
-                  <img src={tag.path} alt={tag.name} />
+                  <img src={tag.path} alt={tag.name} title={tag.name} />
                 </div>
               ))}
             </div>
 
-            <a
-              className="flex items-center gap-2 cursor-pointer text-white-600"
-              href={currentProject.href}
-              target="_blank"
-              rel="noreferrer">
-              <p>Ver Sitio Web</p>
-              <img src="/assets/arrow-up.png" alt="flecha" className="w-3 h-3" />
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                className="flex items-center gap-2 cursor-pointer text-white-600 hover:text-white transition-colors"
+                href={currentProject.repo}
+                target="_blank"
+                rel="noreferrer">
+                <p>Repositorio</p>
+                <img src="/assets/github.svg" alt="github" className="w-4 h-4" />
+              </a>
+
+              <a
+                className="flex items-center gap-2 cursor-pointer text-white-600 hover:text-white transition-colors"
+                href={currentProject.href}
+                target="_blank"
+                rel="noreferrer">
+                <p>Ver Sitio Web</p>
+                <img src="/assets/arrow-up.png" alt="flecha" className="w-3 h-3" />
+              </a>
+            </div>
           </div>
 
           <div className="flex justify-between items-center mt-7">
