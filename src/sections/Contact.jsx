@@ -16,6 +16,11 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
   };
 
+  // Función para verificar si todos los campos están completos
+  const isFormValid = () => {
+    return form.name.trim() !== '' && form.email.trim() !== '' && form.message.trim() !== '';
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -117,7 +122,7 @@ const Contact = () => {
               />
             </label>
 
-            <button className="field-btn" type="submit" disabled={loading}>
+            <button className="field-btn" type="submit" disabled={loading || !isFormValid()}>
               {loading ? 'Enviando...' : 'Enviar Mensaje'}
 
               <img src="/assets/arrow-up.png" alt="arrow-up" className="field-btn_arrow" />
