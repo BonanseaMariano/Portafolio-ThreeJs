@@ -42,7 +42,7 @@ const About = () => {
                 Soy estudiante de Licenciatura en Informática y me apasiona el desarrollo web. Estoy en constante
                 aprendizaje y busco siempre mejorar mis habilidades.
               </p>
-              <a href="/assets/cv-mariano-bonansea.pdf" download="CV-Mariano-Bonansea.pdf" className="w-fit">
+              <a href="/assets/marianobonansea.pdf" download="CV-Mariano-Bonansea.pdf" className="w-fit">
                 <Button name="Descargar CV" containerClass="w-full mt-6" />
               </a>
             </div>
