@@ -1,3 +1,4 @@
+import ModelErrorBoundary from '../components/ModelErrorBoundary.jsx';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera, Center } from '@react-three/drei';
@@ -22,9 +23,9 @@ const RobotSection = () => {
                     className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full"
                 >
                     {/* Mantener el Canvas siempre montado pero pausar frameloop cuando no es visible */}
-                    <Canvas 
+                    <Canvas
                         className="w-full h-full"
-                        frameloop={inView ? 'always' : 'demand'} 
+                        frameloop={inView ? 'always' : 'demand'}
                         dpr={[1, 2]}
                     >
                         <ambientLight intensity={0.5} />
@@ -32,7 +33,9 @@ const RobotSection = () => {
                         <Center>
                             <Suspense fallback={<CanvasLoader />}>
                                 <group scale={1} position={[0, 0, 0]}>
-                                    <SecurityBot isVisible={inView} />
+                                    <ModelErrorBoundary>
+                                        <SecurityBot isVisible={inView} />
+                                    </ModelErrorBoundary>
                                 </group>
                             </Suspense>
                         </Center>

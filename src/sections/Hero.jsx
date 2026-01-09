@@ -1,3 +1,4 @@
+import ModelErrorBoundary from '../components/ModelErrorBoundary.jsx';
 import { Leva } from 'leva';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
@@ -39,14 +40,24 @@ const Hero = () => {
             <PerspectiveCamera makeDefault position={[0, 0, 30]} />
 
             <HeroCamera isMobile={isMobile}>
-              <HackerRoom scale={sizes.deskScale} position={sizes.deskPosition} rotation={[0.1, -Math.PI, 0]} />
+              <ModelErrorBoundary>
+                <HackerRoom scale={sizes.deskScale} position={sizes.deskPosition} rotation={[0.1, -Math.PI, 0]} />
+              </ModelErrorBoundary>
             </HeroCamera>
 
             <group>
-              <Target position={sizes.targetPosition} />
-              <ReactLogo position={sizes.reactLogoPosition} />
-              <Rings position={sizes.ringPosition} />
-              <Cube position={sizes.cubePosition} />
+              <ModelErrorBoundary>
+                <Target position={sizes.targetPosition} />
+              </ModelErrorBoundary>
+              <ModelErrorBoundary>
+                <ReactLogo position={sizes.reactLogoPosition} />
+              </ModelErrorBoundary>
+              <ModelErrorBoundary>
+                <Rings position={sizes.ringPosition} />
+              </ModelErrorBoundary>
+              <ModelErrorBoundary>
+                <Cube position={sizes.cubePosition} />
+              </ModelErrorBoundary>
             </group>
 
             <ambientLight intensity={1} />
@@ -60,7 +71,7 @@ const Hero = () => {
           <Button name="Trabajemos juntos!" isBeam containerClass="sm:w-fit w-full sm:min-w-96" />
         </a>
       </div>
-    </section>
+    </section >
   );
 };
 
